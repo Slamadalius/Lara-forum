@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+    use RecordsActivity;
+
     protected $guarded = [];
 
     //eager loading owner and favorites to reduce number of queries

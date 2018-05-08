@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     public function threads()
     {
-        return $this->hasMany(Thread::class);
+        return $this->hasMany(Thread::class)->latest();
     }
 
     // By default Laravels model binding is trying to fetch an item according to it's id

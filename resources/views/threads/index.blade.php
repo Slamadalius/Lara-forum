@@ -8,7 +8,7 @@
                 <div class="card-header">Forum Threads</div>
 
                 <div class="card-body">
-                    @foreach($threads as $thread)
+                    @forelse($threads as $thread)
                         <article>
                             <!-- href is getting a path funtion from Thread Model, which returns /threads/id -->
                             <div class="d-flex">
@@ -29,7 +29,9 @@
                         </article>
 
                         <hr>
-                    @endforeach
+                    @empty
+                        <p>There is no threads assosiated with this channel</p>
+                    @endforelse
                 </div>
             </div>
         </div>

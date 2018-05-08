@@ -4,7 +4,7 @@
         <div class="p-2">
                 <div class="">
                 <!-- showing reply owner(relationship in Reply model) and created at -->
-                    <a href="#">{{$reply->owner->name}}</a> said {{$reply->created_at->diffForHumans()}}
+                    <a href="/profiles/{{$reply->owner->name}}">{{$reply->owner->name}}</a> said {{$reply->created_at->diffForHumans()}}
                 </div>
         </div>
             

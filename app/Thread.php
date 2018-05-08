@@ -5,10 +5,13 @@ namespace App;
 use App\User;
 use App\Reply;
 use App\Channel;
+use App\Activity;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    use RecordsActivity;
+
     protected $guarded = [];
 
     //You can also add global scope if you need to disable the query that fetches creator as well
@@ -21,6 +24,11 @@ class Thread extends Model
 
         static::addGlobalScope('replyCount', function($builder){
             $builder->withCount('replies');
+        });
+
+        //deletes all the replies assosiated with a thread when deleting it
+        static::deleting(function ($thread) {
+            $thread->replies()->delete();
         });
     }
 

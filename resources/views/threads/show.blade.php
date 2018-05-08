@@ -6,7 +6,21 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <a href="#">{{$thread->creator->name}}</a> posted: {{$thread->title}}
+                        <div class="d-flex">
+                                <div class="p-2">
+                                        <a href="/profiles/{{$thread->creator->name}}">{{$thread->creator->name}}</a> posted: {{$thread->title}}
+                                </div>
+                                
+                                @can ('update', $thread)
+                                <div class="ml-auto p-2">
+                                    <form action="{{$thread->path()}}" method="POST">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        <button type="submit" class="btn btn-link">Delete Thread</button>
+                                    </form>
+                                </div>
+                                @endcan
+                            </div>
                     </div>
 
                     <div class="card-body">{{$thread->body}}</div>
@@ -42,7 +56,7 @@
                 <div class="card">
                     <div class="card-body">
                         <p>This thread was published {{ $thread->created_at->diffForHumans() }} 
-                        by <a href="#" class="">{{ $thread->creator->name }}</a>,
+                        by <a href="/profiles/{{ $thread->creator->name }}" class="">{{ $thread->creator->name }}</a>,
                         {{-- we can use replies_count attribute because of globalScope in boot method Thread model / using laravel function str_plural to add 's' if more then 1 reply --}}
                         and currently has {{ $thread->replies_count }} {{ str_plural('comment', $thread->replies_count) }}.
                         </p>    
