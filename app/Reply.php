@@ -3,11 +3,13 @@
 namespace App;
 
 use App\User;
+use App\Thread;
 use App\Favorites;
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+    //trait to record activities with reply dynamicaly
     use RecordsActivity;
 
     protected $guarded = [];
@@ -19,6 +21,11 @@ class Reply extends Model
     public function owner() 
     {
         return $this->belongsTo(User::class, 'user_id'); //We have to specify foreign key 'user_id' because owner name is used
+    }
+
+    public function thread()
+    {
+        return $this->belongsTo(Thread::class);
     }
 
     //Creating favorites elequant relationship (reply has many favorites)

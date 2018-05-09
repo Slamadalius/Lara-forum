@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Thread;
+use App\Activity;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -32,6 +33,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Thread::class)->latest();
     }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class)->latest();
+    }
+
 
     // By default Laravels model binding is trying to fetch an item according to it's id
     // so we have to override to use name instead

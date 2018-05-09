@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    //trait to record activities with thread
     use RecordsActivity;
 
     protected $guarded = [];
@@ -26,9 +27,9 @@ class Thread extends Model
             $builder->withCount('replies');
         });
 
-        //deletes all the replies assosiated with a thread when deleting it
+        //deletes all the replies assosiated with a thread when deleting it (activities as well)
         static::deleting(function ($thread) {
-            $thread->replies()->delete();
+            $thread->replies->each->delete();
         });
     }
 

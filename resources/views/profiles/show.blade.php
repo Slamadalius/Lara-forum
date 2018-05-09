@@ -13,28 +13,14 @@
     </div>
     <div class="container">
         <div class="row ">
-            @foreach($threads as $thread)
-            <div class="col-md-12">
-                <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex">
-                                <div class="p-2">
-                                    <a href="#">{{$thread->creator->name}}</a> posted: {{$thread->title}}
-                                </div>
-                                    
-                                <div class="ml-auto p-2">
-                                    <p>{{$thread->created_at->diffForHumans()}}</p>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="card-body">{{$thread->body}}</div>
-                </div>
-                <br>
-            </div>
+            @foreach($activities as $date=>$activity)
+            <h3 class="">{{$date}}</h3>
+                @foreach($activity as $record)
+                    @include("profiles.activities.{$record->type}", ['activity'=>$record])
+                @endforeach 
             @endforeach
 
-            {{$threads->links()}}
+            {{-- {{$threads->links()}} --}}
         </div>
     </div>
 @endsection
