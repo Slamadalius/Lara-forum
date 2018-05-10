@@ -33,7 +33,7 @@ class ReplyController extends Controller
             'user_id' => auth()->id() // or Auth::id()
         ]);
 
-        //redirecting back to where the form was submited 
-        return back();
+        //redirecting back to where the form was submited with a flash message
+        return back()->with('flash', 'Your reply has been left');
     }
 }

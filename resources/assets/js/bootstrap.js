@@ -1,3 +1,4 @@
+import Vue from 'vue';
 
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
@@ -54,3 +55,9 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+window.event = new Vue();
+
+window.flash = function (message) {
+    window.event.$emit('flash', message);
+}
